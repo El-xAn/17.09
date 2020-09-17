@@ -1,0 +1,11 @@
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.exe
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.deps.json
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.runtimeconfig.json
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.runtimeconfig.dev.json
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.dll
+C:\Users\User\Desktop\17.09\day_12\day_12\bin\Debug\netcoreapp3.1\day_12.pdb
+C:\Users\User\Desktop\17.09\day_12\day_12\obj\Debug\netcoreapp3.1\day_12.csprojAssemblyReference.cache
+C:\Users\User\Desktop\17.09\day_12\day_12\obj\Debug\netcoreapp3.1\day_12.AssemblyInfoInputs.cache
+C:\Users\User\Desktop\17.09\day_12\day_12\obj\Debug\netcoreapp3.1\day_12.AssemblyInfo.cs
+C:\Users\User\Desktop\17.09\day_12\day_12\obj\Debug\netcoreapp3.1\day_12.dll
+C:\Users\User\Desktop\17.09\day_12\day_12\obj\Debug\netcoreapp3.1\day_12.pdb
