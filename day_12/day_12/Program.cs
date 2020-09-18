@@ -10,15 +10,17 @@ namespace day_12
 
         public Person()
         {
-            Console.WriteLine("Enter lastname :");
+            Console.WriteLine("Фамилия студента");
             LastName = Check.CheckString();
-            Console.WriteLine("Enter name :");
+            Console.WriteLine("Имя студента :");
             Name = Check.CheckString();
-            Console.WriteLine("Na kakom kurse ucites?");
+            Console.WriteLine("Курс :");
             Course = Check.CheckInt();
         }
         public abstract void InputData();
+    }
 
+    
         class Student : Person
         {
             
@@ -27,24 +29,24 @@ namespace day_12
             }
             public override void InputData()
             {
-                Console.WriteLine($"{LastName} {Name} ucitsa na {Course}om kurse.");
+                Console.WriteLine($"{LastName} {Name} учиться в {Course}ом курсе.");
 
             }
 
         }
-        class Aspirant : Person
+    class Aspirant : Person
         {
-            string Diss { get; set; }
+            int Diss { get; set; }
             public Aspirant()
                 : base( )
             {
-                Console.WriteLine("Thesis :");
-                this.Diss = Check.CheckString();
+                Console.WriteLine("Номер диссертации :");
+                this.Diss = Check.CheckInt();
             }
             
             public override void InputData()
             {
-                Console.WriteLine($"Student {LastName} {Name} ucitsa {Course}om kurse. Dissertaciya : {Diss}");
+                Console.WriteLine($"Аспирант {LastName} {Name} учиться в {Course}ом курсе. Номер диссертации : {Diss}");
             }
         }
 
@@ -108,119 +110,52 @@ namespace day_12
         {
             static void Main(string[] args)
             {
-                Student st = new Student();
-                st.InputData();
-                Aspirant asp = new Aspirant();
-                asp.InputData();
-                //Console.WriteLine("1.Register students:" +
-                //    //"\n2.Show all registered students:" +
-                //    //"\n3.Find student:" +
-                //    "\n4.Exit:");
+                Console.WriteLine("1.Регистрация студентов :" +
+                    "\n2.Выход :");
 
-                ////int count1 = 0;
-                ////int count2 = 0;
+                bool b = false;
+                do
+                {
+                    bool b1 = false;
 
+                    Console.WriteLine("Выберите номер меню :");
+                    int menu = Check.CheckInt();
+                    switch (menu)
+                    {
+                        case 1:
+                            do
+                            {
+                                Console.WriteLine("Кого хотите зарегистрировать:" +
+                                    "\n1.Студент " +
+                                    "\n2.Аспирант ");
 
-                //bool b = false;
-                //do
-                //{
-                //    bool b1 = false;
+                                int m = Check.CheckInt();
+                                if (m == 1)
+                                {
+                                   Student st = new Student();
+                                    st.InputData();
+                                    b1 = true;
+                                    break;
+                                }
 
-                //    Console.WriteLine("Select number of menu:");
-                //    int menu = Check.CheckInt();
-                //    switch (menu)
-                //    {
-                //        case 1:
-                //            do
-                //            {
-                //                Console.WriteLine("Are you:" +
-                //                    "\n1.Student" +
-                //                    "\n2.Graduate student");
+                                if (m == 2)
+                                {
+                                    Aspirant asp = new Aspirant();
+                                    asp.InputData();
+                                    b1 = true;
+                                    break;
+                                }
 
-                //                int m = Check.CheckInt();
-                //                if (m == 1)
-                //                {
-                //                    Student st = new Student();
-                //                    st.InputData();
-                //                    //for (int i = 0; i < count1; i++)
-                //                    //{
-
-                //                    //}
-                //                    b1 = true;
-                //                    break;
-                //                }
-
-                //                if (m == 2)
-                //                {
-                //                    Aspirant asp = new Aspirant();
-                //                    asp.InputData();
-                //                    //for (int i = 0; i < count2; i++)
-                //                    //{
-
-                //                    //}
-                //                    //b1 = true;
-                //                    break;
-                //                }
-
-                //            } while (b1 == false);
-                //            break;
-                //case 2:
-                //    for (int i = 0; i < count1; i++)
-                //    {
-                //        st.Info();
-                //    }
-                //    for (int i = 0; i < count2; i++)
-                //    {
-                //        asp.DisplayA();
-                //    }
-                //    break;
-                //case 3:
-                //    do
-                //    {
-                //        Console.WriteLine("Input who want you to search: Student (stud) or graduate student (asp) ?");
-                //        string who = Console.ReadLine();
-                //        if (who == "stud" || who == "Stud")
-                //        {
-                //            Console.WriteLine("Enter student's number:");
-                //            int num = Check.CheckInt();
-                //            if (st[num - 1] == null)
-                //            {
-                //                Console.WriteLine("There aren't any students.");
-                //            }
-                //            else
-                //            {
-                //                st[num - 1].Display();
-                //            }
-                //            b1 = true;
-                //        }
-                //        else if (who == "asp" || who == "Asp")
-                //        {
-                //            Console.WriteLine("Enter graduate student's number:");
-                //            int num = Check.CheckInt();
-                //            if (asp[num - 1] == null)
-                //            {
-                //                Console.WriteLine("There aren't any graduate students.");
-                //            }
-                //            else
-                //            {
-                //                asp[num - 1].DisplayA();
-                //            }
-                //            b1 = true;
-                ///        }
-                //        else
-                //        {
-                //            Console.WriteLine("Wrong enter, try again.");
-                //            b1 = false;
-                //        }
-                //    } while (b1 == false);
-                //    break;
-                //        case 4:
-                //            Console.WriteLine("The program has finished.");
-                //            b = true;
-                //            break;
-                //    }
-                //} while (b == false);
+                            } while (b1 == false);
+                            break;
+                        
+                        case 2:
+                            Console.WriteLine("Программа завершена.");
+                            b = true;
+                            break;
+                    }
+                } while (b == false);
             }
         }
     }
-}
+
