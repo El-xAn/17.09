@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 
 namespace day_12
 {
@@ -10,14 +11,14 @@ namespace day_12
 
         public Person()
         {
-            Console.WriteLine("Фамилия студента");
+            Console.WriteLine("Фамилия :");
             LastName = Check.CheckString();
-            Console.WriteLine("Имя студента :");
+            Console.WriteLine("Имя :");
             Name = Check.CheckString();
             Console.WriteLine("Курс :");
             Course = Check.CheckInt();
         }
-        public abstract void InputData();
+        public abstract void GetData();
     }
 
     
@@ -27,7 +28,7 @@ namespace day_12
             public Student() : base()
             {                                
             }
-            public override void InputData()
+            public override void GetData()
             {
                 Console.WriteLine($"{LastName} {Name} учиться в {Course}ом курсе.");
 
@@ -36,7 +37,7 @@ namespace day_12
         }
     class Aspirant : Person
         {
-            int Diss { get; set; }
+            public int Diss { get; set; }
             public Aspirant()
                 : base( )
             {
@@ -44,7 +45,7 @@ namespace day_12
                 this.Diss = Check.CheckInt();
             }
             
-            public override void InputData()
+            public override void GetData()
             {
                 Console.WriteLine($"Аспирант {LastName} {Name} учиться в {Course}ом курсе. Номер диссертации : {Diss}");
             }
@@ -84,7 +85,7 @@ namespace day_12
                             }
 
                         if (IsIt == false)
-                            Console.WriteLine("Wrong input. Enter again : ");
+                            Console.WriteLine("Неправильный ввод. Введите снова : ");
                     }while (IsIt == false);
                 return name;
                 
@@ -99,7 +100,7 @@ namespace day_12
 
                         bool result = int.TryParse(input, out num);
                         if (result == false)
-                            Console.WriteLine("Wrong input. Enter again : ");
+                            Console.WriteLine("Неправильный ввод. Введите снова : ");
                         else
                             break;
                     } while (IsIt == false);
@@ -110,52 +111,102 @@ namespace day_12
         {
             static void Main(string[] args)
             {
-                Console.WriteLine("1.Регистрация студентов :" +
-                    "\n2.Выход :");
+            Console.WriteLine("1.Регистрация студентов :" +
+                            "\n2.Информация о студентах :" +
+                            "\n3.Удаление из списка студентов :" +
+                            "\n4.Выход :");
 
-                bool b = false;
-                do
+            ArrayList students = new ArrayList();
+            ArrayList g_students = new ArrayList();
+
+            bool b = false;
+            do
+            {
+                bool b1 = false;
+
+                Console.WriteLine("Выберите номер меню :");
+                int menu = Check.CheckInt();
+                switch (menu)
                 {
-                    bool b1 = false;
+                    case 1:
+                        do
+                        {
+                            Console.WriteLine("Кого хотите зарегистрировать:" +
+                                "\n1.Студент " +
+                                "\n2.Аспирант ");
 
-                    Console.WriteLine("Выберите номер меню :");
-                    int menu = Check.CheckInt();
-                    switch (menu)
-                    {
-                        case 1:
-                            do
+                            int m = Check.CheckInt();
+                            if (m == 1)
                             {
-                                Console.WriteLine("Кого хотите зарегистрировать:" +
-                                    "\n1.Студент " +
-                                    "\n2.Аспирант ");
+                                Student st = new Student();
+                                students.AddRange(new string[] { $"Студент {st.LastName} {st.Name} учиться в {st.Course}ом курсе." });                                
+                                b1 = true;
+                                break;
+                            }
 
-                                int m = Check.CheckInt();
-                                if (m == 1)
+                            if (m == 2)
+                            {
+                                Aspirant asp = new Aspirant();
+                                g_students.AddRange(new string[] { $"Аспирант {asp.LastName} {asp.Name} учиться в {asp.Course}ом курсе. Номер диссертации : {asp.Diss}" });
+                                b1 = true;
+                                break;
+                            }
+
+                        } while (b1 == false);
+                        break;
+
+                    case 2:
+                        Console.WriteLine("Выберите 1 для информации о студентах и 2 для аспирантов.");
+                        int i = Check.CheckInt();
+                        switch (i)
+                        {
+                            case 1:
+                                foreach (object stud in students)
                                 {
-                                   Student st = new Student();
-                                    st.InputData();
-                                    b1 = true;
-                                    break;
+                                    Console.WriteLine(stud);
                                 }
-
-                                if (m == 2)
+                                break;
+                            case 2:
+                                foreach (object aspi in g_students)
                                 {
-                                    Aspirant asp = new Aspirant();
-                                    asp.InputData();
-                                    b1 = true;
-                                    break;
+                                    Console.WriteLine(aspi);
                                 }
-
-                            } while (b1 == false);
-                            break;
-                        
-                        case 2:
-                            Console.WriteLine("Программа завершена.");
-                            b = true;
-                            break;
-                    }
-                } while (b == false);
-            }
+                                break;
+                            default:
+                                Console.WriteLine("Неправильный ввод.");
+                                break;
+                        }   
+                        break;
+                    case 3:
+                        Console.WriteLine("Выберите 1 для удаление студентов и 2 для аспирантов.");
+                        int f = Check.CheckInt();
+                        switch (f)
+                        {
+                            case 1:
+                                Console.WriteLine("Введите номер студента которого хотите удалить из списка");
+                                int n = Check.CheckInt();
+                                if (n >= 1 && n <= students.Count) { students.RemoveAt(n - 1); }
+                                else { Console.WriteLine("Нет столько студентов."); }
+                                break;
+                            case 2:
+                                Console.WriteLine("Введите номер аспиранта которого хотите удалить из списка");
+                                int g = Check.CheckInt();
+                                if (g >= 1 && g <= students.Count) { g_students.RemoveAt(g - 1); }
+                                else { Console.WriteLine("Нет столько аспирантов."); }
+                                break;
+                            default:
+                                Console.WriteLine("Неправильный ввод.");
+                                break;
+                        }                        
+                        break;
+                    case 4:
+                        Console.WriteLine("Программа завершена.");
+                        b = true;
+                        break;
+                }
+            } while (b == false);
+            Console.ReadKey();
+        }
         }
     }
 
